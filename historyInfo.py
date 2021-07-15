@@ -19,11 +19,14 @@ def downloadFile(sDay,eDay,path):
             url = 'http://quotes.money.163.com/service/chddata.html?code=0' + code + '&start=' + sDay + '&end=' + eDay + '&fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP'
         else:
             url = 'http://quotes.money.163.com/service/chddata.html?code=1' + code + '&start=' + sDay + '&end=' + eDay + '&fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP'
-        urllib.request.urlretrieve(url, path + code + '.csv')
 
+        urllib.request.urlretrieve(url, path + code + '.csv') # 保存爬取的文件
 
+#######################
 sDay = '20000101'
 eDay = '20210708'
+### 此处输入时间范围 #####
+
 path = 'output\\history_info\\'
 
 if not os.path.exists(path):
