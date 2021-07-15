@@ -17,104 +17,106 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`gtss` /*!40100 DEFAULT CHARACTER SET ut
 
 USE `gtss`;
 
-/*Table structure for table `lh_t_order_infor` */
+/*Table structure for table `order` */
 
-DROP TABLE IF EXISTS `lh_t_order_infor`;
+DROP TABLE IF EXISTS `order`;
 
-CREATE TABLE `lh_t_order_infor` (
-  `orderID` int(16) NOT NULL AUTO_INCREMENT,
-  `userID` int(16) DEFAULT NULL,
-  `strategyID` int(16) DEFAULT NULL,
-  `setTime` int(11) DEFAULT NULL,
-  `orderState` int(11) DEFAULT NULL,
-  `orderPrice` double DEFAULT NULL,
-  PRIMARY KEY (`orderID`),
-  KEY `userID` (`userID`),
-  KEY `strategyID` (`strategyID`),
-  CONSTRAINT `lh_t_order_infor_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `lh_t_user_infor` (`userID`),
-  CONSTRAINT `lh_t_order_infor_ibfk_2` FOREIGN KEY (`strategyID`) REFERENCES `lh_t_strategy_infor` (`strategyID`)
+CREATE TABLE `order` (
+  `orderId` int(16) NOT NULL AUTO_INCREMENT,
+  `userId` int(16) NOT NULL,
+  `strategyId` int(16) NOT NULL,
+  `setTime` date NOT NULL,
+  `orderState` int(11) NOT NULL,
+  `orderPrice` double NOT NULL,
+  PRIMARY KEY (`orderId`),
+  KEY `userID` (`userId`),
+  KEY `strategyID` (`strategyId`),
+  CONSTRAINT `order_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
+  CONSTRAINT `order_ibfk_2` FOREIGN KEY (`strategyID`) REFERENCES `strategy` (`strategyID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `lh_t_order_infor` */
+/*Data for the table `order` */
 
-/*Table structure for table `lh_t_stock_infor` */
+/*Table structure for table `stock` */
 
-DROP TABLE IF EXISTS `lh_t_stock_infor`;
+DROP TABLE IF EXISTS `stock`;
 
-CREATE TABLE `lh_t_stock_infor` (
-  `stockCode` int(11) NOT NULL,
-  `stockName` varchar(20) DEFAULT NULL,
+CREATE TABLE `stock` (
+  `stockCode` varchar(11) NOT NULL,
+  `stockName` varchar(20) NOT NULL,
   PRIMARY KEY (`stockCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `lh_t_stock_infor` */
+/*Data for the table `stock` */
 
-/*Table structure for table `lh_t_strategy_infor` */
+/*Table structure for table `strategy` */
 
-DROP TABLE IF EXISTS `lh_t_strategy_infor`;
+DROP TABLE IF EXISTS `strategy`;
 
-CREATE TABLE `lh_t_strategy_infor` (
-  `strategyID` int(11) NOT NULL AUTO_INCREMENT,
-  `strategyName` varchar(20) DEFAULT NULL,
-  `strategyPrice` double DEFAULT NULL,
-  `strategyIntro` text,
-  PRIMARY KEY (`strategyID`)
+CREATE TABLE `strategy` (
+  `strategyId` int(11) NOT NULL AUTO_INCREMENT,
+  `strategyName` varchar(20) NOT NULL,
+  `strategyPrice` double NOT NULL,
+  `strategyIntro` text NOT NULL,
+  PRIMARY KEY (`strategyId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `lh_t_strategy_infor` */
+/*Data for the table `strategy` */
 
-/*Table structure for table `lh_t_user_infor` */
+/*Table structure for table `user` */
 
-DROP TABLE IF EXISTS `lh_t_user_infor`;
+DROP TABLE IF EXISTS `user`;
 
-CREATE TABLE `lh_t_user_infor` (
-  `userID` int(16) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-  `Email` varchar(50) DEFAULT NULL COMMENT '用户邮箱',
-  `userPassword` varchar(20) DEFAULT NULL COMMENT '登陆密码',
-  `userAuthority` tinyint(8) DEFAULT NULL COMMENT '用户权限',
-  `capitalReady` double DEFAULT NULL COMMENT '预备投资金额',
-  PRIMARY KEY (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `user` (
+  `userId` int(16) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `email` varchar(50) NOT NULL COMMENT '用户邮箱',
+  `userPassword` varchar(32) NOT NULL COMMENT '登陆密码',
+  `userAuthority` tinyint(8) NOT NULL COMMENT '用户权限',
+  `capitalReady` float DEFAULT NULL COMMENT '预备投资金额',
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-/*Data for the table `lh_t_user_infor` */
+/*Data for the table `user` */
 
-/*Table structure for table `lh_t_userstock` */
 
-DROP TABLE IF EXISTS `lh_t_userstock`;
 
-CREATE TABLE `lh_t_userstock` (
-  `stockAlreadyID` int(16) NOT NULL,
-  `stockCode` int(11) DEFAULT NULL,
+/*Table structure for table `userstock` */
+
+DROP TABLE IF EXISTS `userstock`;
+
+CREATE TABLE `userstock` (
+  `stockAlreadyId` int(16) NOT NULL,
+  `stockCode` varchar(11) DEFAULT NULL,
   `stockCount` int(11) DEFAULT NULL,
   `buyingPrice` double DEFAULT NULL,
   `buyingPriAll` double DEFAULT NULL,
-  `userID` int(16) DEFAULT NULL,
-  PRIMARY KEY (`stockAlreadyID`),
+  `userId` int(16) NOT NULL,
+  PRIMARY KEY (`stockAlreadyId`),
   KEY `stockCode` (`stockCode`),
-  KEY `userID` (`userID`),
-  CONSTRAINT `lh_t_userstock_ibfk_1` FOREIGN KEY (`stockCode`) REFERENCES `lh_t_stock_infor` (`stockCode`),
-  CONSTRAINT `lh_t_userstock_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `lh_t_user_infor` (`userID`)
+  KEY `userID` (`userId`),
+  CONSTRAINT `userstock_ibfk_1` FOREIGN KEY (`stockCode`) REFERENCES `stock` (`stockCode`),
+  CONSTRAINT `userstock_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `lh_t_userstock` */
+/*Data for the table `userstock` */
 
-/*Table structure for table `lh_t_userstrategy` */
+/*Table structure for table `userstrategy` */
 
-DROP TABLE IF EXISTS `lh_t_userstrategy`;
+DROP TABLE IF EXISTS `userstrategy`;
 
-CREATE TABLE `lh_t_userstrategy` (
-  `saledID` int(16) NOT NULL AUTO_INCREMENT,
-  `userID` int(16) DEFAULT NULL,
-  `strategyID` int(16) DEFAULT NULL,
-  `limitTime` int(11) DEFAULT NULL,
-  PRIMARY KEY (`saledID`),
-  KEY `userID` (`userID`),
-  KEY `strategyID` (`strategyID`),
-  CONSTRAINT `lh_t_userstrategy_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `lh_t_user_infor` (`userID`),
-  CONSTRAINT `lh_t_userstrategy_ibfk_2` FOREIGN KEY (`strategyID`) REFERENCES `lh_t_strategy_infor` (`strategyID`)
+CREATE TABLE `userstrategy` (
+  `saledId` int(16) NOT NULL AUTO_INCREMENT,
+  `userId` int(16) NOT NULL,
+  `strategyId` int(16) NOT NULL,
+  `limitTime` int(11) NOT NULL,
+  PRIMARY KEY (`saledId`),
+  KEY `userID` (`userId`),
+  KEY `strategyID` (`strategyId`),
+  CONSTRAINT `userstrategy_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
+  CONSTRAINT `userstrategy_ibfk_2` FOREIGN KEY (`strategyID`) REFERENCES `strategy` (`strategyID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `lh_t_userstrategy` */
+/*Data for the table `userstrategy` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
