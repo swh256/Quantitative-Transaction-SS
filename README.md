@@ -36,5 +36,7 @@ npm run server
 ```shell
 #进入mysql环境 创建数据库
 source C:/your_path/createDB.sql;
+#导入初始数据
+source C:/your_path/initDB.sql;
 ```
 
