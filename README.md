@@ -33,3 +33,8 @@ npm install
 npm run server
 ```
 
+```shell
+#进入mysql环境 创建数据库
+source C:/your_path/createDB.sql;
+```
+
