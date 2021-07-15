@@ -1,23 +1,58 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import index from '../views/index'
+import logIn from "../views/logIn.vue"
+import userInfo from "../views/userInfo";
+import register from "../views/register";
+import strategyStore from "../views/strategyStore";
+import stockQuotation from "../views/stockQuotation";
+import stockMarketQuotation from "../views/stockMarketQuotation";
+import manager from "../views/manager";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'index',
+    component: index
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/login',
+    name: 'logIn',
+    component: logIn
+  },
+  {
+    path: '/userinfo',
+    name: 'userInfo',
+    component: userInfo
+  },
+  {
+    path: '/login/register',
+    name: 'register',
+    component: register
+  },
+  {
+    path: '/strategystore',
+    name: 'strategyStore',
+    component: strategyStore
+  },
+  {
+    path: '/stockinfo/stockquotation',
+    name: 'stockQuotation',
+    component: stockQuotation
+  },
+  {
+    path: '/stockinfo/stockmarketquotation',
+    name: 'stockMarketQuotation',
+    component: stockMarketQuotation
+  },
+  {
+    path: '/manager',
+    name: 'manager',
+    component: manager
+  },
+
 ]
 
 const router = new VueRouter({
