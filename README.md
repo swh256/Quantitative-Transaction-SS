@@ -11,3 +11,25 @@ git commit -m"**"
 git push -u origin 分支名
 ```
 
+
+
+### 环境部署
+
+```shell
+#flask 依赖
+pip install -r requirments.txt
+
+#flask 运行
+python app.py
+```
+
+
+
+```shell
+#vue 安装
+npm install --global @vue/cli
+#vue 使用
+npm install
+npm run server
+```
+
