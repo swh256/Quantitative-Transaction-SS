@@ -9,6 +9,10 @@ git checkout 分支名
 git add *
 git commit -m"**"
 git push -u origin 分支名
+
+#拉去master 到本地(无冲突的情况）
+git checkout 分支名
+git pull origin master
 ```
 
 
