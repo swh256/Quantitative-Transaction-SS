@@ -6,7 +6,7 @@
     <div class="workinghny-form-grid">
       <div class="wrapper">
         <div class="logo">
-          <h1><a class="brand-logo" href="index.html"><span>Working</span> Sign In</a></h1>
+          <h1><a class="brand-logo" href=""><span>Welcome to</span> use our products</a></h1>
           <!-- if logo is image enable this
               <a class="brand-logo" href="#index.html">
                   <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
@@ -14,7 +14,7 @@
         </div>
         <div class="workinghny-block-grid">
           <div class="workinghny-left-img align-end">
-            <img src="../assets/images/2.png" class="img-responsive" alt="img" />
+            <img src="../assets/images/1.png" class="img-responsive" alt="img" />
           </div>
           <div class="form-right-inf">
 
@@ -30,14 +30,20 @@
                   <label>Password</label>
                   <input type="password" name="Password"  placeholder="" required="">
                 </div>
-                <label class="check-remaind">
-                  <input type="checkbox">
-                  <span class="checkmark"></span>
-                  <p class="remember">Remember Me</p>
+                <div class="one-frm">
+                  <label>Confirm Password</label>
+                  <input type="password" name="ConfirmPassword"  placeholder="" required="">
+                </div>
+<!--                <label class="check-remaind">-->
+<!--                  <input type="checkbox">-->
+<!--                  <span class="checkmark"></span>-->
+<!--                  <p class="remember">Remember Me</p>-->
 
-                </label>
-                <button class="btn btn-style mt-3">Sign In </button>
-                <p class="already">Don't have an account? <a href="#signin">Sign Up</a></p>
+<!--                </label>-->
+                <br/><hr><br/>
+
+                <button class="btn btn-style mt-3">Submit </button>
+                <p class="already">Already have an account? <a href="#login">Log In</a></p>
               </form>
             </div>
           </div>
@@ -48,8 +54,7 @@
     <!-- copyright-->
     <div class="copyright text-center">
       <div class="wrapper">
-        <p class="copy-footer-29">© 2020 Working Sign In. All rights reserved | Design by <a
-            href="https://w3layouts.com">W3layouts</a></p>
+        <p class="copy-footer-29">© 2021 Working Register.</p>
       </div>
     </div>
     <!-- //copyright-->
