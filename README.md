@@ -9,6 +9,10 @@ git checkout 分支名
 git add *
 git commit -m"**"
 git push -u origin 分支名
+
+#拉去master 到本地(无冲突的情况）
+git checkout 分支名
+git pull origin master
 ```
 
 
@@ -36,5 +40,23 @@ npm run server
 ```shell
 #进入mysql环境 创建数据库
 source C:/your_path/createDB.sql;
+#导入初始数据
+source C:/your_path/initDB.sql;
+
 ```
 
+
+
+```shell
+# Project setup
+npm install
+
+# Compiles and hot-reloads for development
+npm run serve
+
+# Compiles and minifies for production
+npm run build
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
