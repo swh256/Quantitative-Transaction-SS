@@ -6,7 +6,7 @@
       <div class="workinghny-form-grid">
         <div class="wrapper">
           <div class="logo">
-            <h1><a class="brand-logo" href=""><span>Welcome to</span> use our products</a></h1>
+            <h1><a class="brand-logo"><span>Welcome to</span> use our products</a></h1>
             <!-- if logo is image enable this
                 <a class="brand-logo" href="#index.html">
                     <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
@@ -36,8 +36,10 @@
                     <p class="remember">Remember Me</p>
 
                   </label>
-                  <button class="btn btn-style mt-3">Sign In </button>
-                  <p class="already">Don't have an account? <a href="#signin">Register</a></p>
+                  <button class="btn btn-style mt-3" type="submit">Sign In </button>
+                  <p class="already">Don't have an account?
+                    <router-link :to="{name:'register'}">Register</router-link>
+                  </p>
                 </form>
               </div>
             </div>
