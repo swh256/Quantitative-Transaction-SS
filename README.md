@@ -20,10 +20,10 @@ git pull origin master
 ### 环境部署
 
 ```shell
-#flask 依赖
+#backend 依赖
 pip install -r requirments.txt
 
-#flask 运行
+#backend 运行
 python app.py
 ```
 

@@ -4,7 +4,8 @@ from flask import Flask
 # app = Flask(__name__)
 
 from db_config import app
-
+from db_config import db_init as db
+from operation import user_operation
 
 # 导入蓝图
 from handler.user import user
@@ -15,7 +16,11 @@ app.register_blueprint(user,url_prefix="/user")
 @app.route('/')
 def index():
     # 数据字典
-    return 'index'
+    m = user_operation.UserDao()._all()
+    r = m[0].email
+    m[0].delete()
+    db.session.commit()
+    return r
 
 
 # 启动web后台服务

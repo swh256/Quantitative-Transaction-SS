@@ -7,7 +7,6 @@ from flask import Blueprint,request,Response,jsonify
 from api.user_api import *
 
 
-# 创建user蓝图《路由模块》
 user = Blueprint('user',__name__)
 
 
@@ -23,7 +22,6 @@ def list():
     data = User_list()
     
     return jsonify(data)
-
 
 
 
