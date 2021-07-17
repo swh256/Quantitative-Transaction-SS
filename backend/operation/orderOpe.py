@@ -1,7 +1,7 @@
 from models.order import Order
 from db_config import db_init as db
 # 用户模块操作类
-class User_Operation():
+class UserOpe():
     # 应该映射到order表的字段
     def __init__(self):
         self.__fields__ = ['orderId',
