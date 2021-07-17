@@ -5,7 +5,7 @@ from db_config import db_init as db
 # 创建数据模型类
 class User(db.Model):
     __tablename__ = 'user'
-    userId = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    userId = db.Column(db.Integer, primary_key=True, nullable=False,autoincrement=True)
     email = db.Column(db.String(255), nullable=False)
     userPassword = db.Column(db.String(255), nullable=False)
     userAuthority = db.Column(db.String(255), nullable=False)
