@@ -1,10 +1,10 @@
 # 导入对应数据模型类
 from db_config import db_init as db
-from models.userstock import UserStock
+from models.userStock import UserStock
 
 
 # 用户模块操作类
-class userStock_Operation():
+class userStockOpe():
     # 应该映射到userstock表的字段
     def __init__(self):
         self.__fields__ = ['stockAlreadyId',
