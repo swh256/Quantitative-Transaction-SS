@@ -6,7 +6,11 @@
     <div class="workinghny-form-grid">
       <div class="wrapper">
         <div class="logo">
-          <h1><a class="brand-logo" href="index.html"><span>Working</span> Sign In</a></h1>
+          <h1>
+            <router-link :to="{name:'logIn',params:{}}" class="brand-logo">
+              <span>Welcome to</span> use our products
+            </router-link>
+          </h1>
           <!-- if logo is image enable this
               <a class="brand-logo" href="#index.html">
                   <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
@@ -14,31 +18,35 @@
         </div>
         <div class="workinghny-block-grid">
           <div class="workinghny-left-img align-end">
-            <img src="../assets/images/2.png" class="img-responsive" alt="img" />
+            <img src="../assets/images/1.png" class="img-responsive" alt="img" />
           </div>
           <div class="form-right-inf">
 
             <div class="login-form-content">
-              <h2>Where to?</h2>
-              <form action="#" class="signin-form" method="post">
+              <div  class="signin-form">
                 <div class="one-frm">
 
                   <label>E-mail</label>
-                  <input type="text" name="E-mail"  placeholder="" required="">
+                  <input type="text" name="E-mail" v-model="userEmail"  placeholder="" required="">
                 </div>
                 <div class="one-frm">
                   <label>Password</label>
-                  <input type="password" name="Password"  placeholder="" required="">
+                  <input type="password" name="Password" v-model="userPwd" placeholder="" required="">
                 </div>
-                <label class="check-remaind">
-                  <input type="checkbox">
-                  <span class="checkmark"></span>
-                  <p class="remember">Remember Me</p>
+                <div class="one-frm">
+                  <label>Confirm Password</label>
+                  <input type="password" name="ConfirmPassword" v-model="confirmPwd" placeholder="" required="">
+                </div>
+<!--                <label class="check-remaind">-->
+<!--                  <input type="checkbox">-->
+<!--                  <span class="checkmark"></span>-->
+<!--                  <p class="remember">Remember Me</p>-->
 
-                </label>
-                <button class="btn btn-style mt-3">Sign In </button>
-                <p class="already">Don't have an account? <a href="#signin">Sign Up</a></p>
-              </form>
+<!--                </label>-->
+                <br/><br/>
+                <button class="btn btn-style mt-3" type="submit" @click="Push_User_Info">Submit </button>
+                <p class="already">Already have an account? <router-link :to="{name:'logIn',params:{}}">Log In</router-link></p>
+              </div>
             </div>
           </div>
         </div>
@@ -48,8 +56,8 @@
     <!-- copyright-->
     <div class="copyright text-center">
       <div class="wrapper">
-        <p class="copy-footer-29">© 2020 Working Sign In. All rights reserved | Design by <a
-            href="https://w3layouts.com">W3layouts</a></p>
+        <el-button @click="Push_User_Info">test</el-button>
+        <p class="copy-footer-29">© 2021 Working Register.{{testData}}{{userEmail}}</p>
       </div>
     </div>
     <!-- //copyright-->
@@ -59,8 +67,34 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "register"
+  name: "register",
+  data(){
+    return{
+      userEmail:'',
+      userPwd:'',
+      confirmPwd:'',
+      testData:''
+    }
+  },
+  methods:{
+    Push_User_Info(){
+      axios.get('http://192.168.43.95:5000/manager/getUserInfoList')
+      .then(data => {
+        if (data.status == 200) {
+          this.testData = data.data
+          console.log(data)
+        } else {
+          // alert('加载错误!')
+          console.log(data)
+        }
+      })
+      // alert(this.testData);
+    }
+
+  }
 }
 </script>
 

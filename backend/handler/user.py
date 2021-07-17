@@ -13,7 +13,8 @@ user = Blueprint('user',__name__)
 @user.route("/list")
 def list():
     # 前端传递的参数  request
-    # request.args
+    # request.
+    
     # request.data
     # request.file 
 
