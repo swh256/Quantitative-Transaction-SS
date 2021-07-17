@@ -4,6 +4,11 @@
   </div>
 </template>
 
+<script>
+  // import nav from "./components/nav";
+  // import headNav from "./components/headNav";
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

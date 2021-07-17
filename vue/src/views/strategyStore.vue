@@ -1,12 +1,19 @@
 <template>
 <div class="strategyStore">
-  <h1>STRATEGY_STORE</h1>
+  <HeadNav></HeadNav>
 </div>
 </template>
 
 <script>
+import headNav from "../components/headNav";
+import HeadNav from "../components/headNav";
 export default {
-  name: "strategyStore"
+  name: "strategyStore",
+  components: {HeadNav},
+  component(id) {
+    headNav
+  }
+
 }
 </script>
 
