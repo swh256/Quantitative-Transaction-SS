@@ -28,6 +28,7 @@ CREATE TABLE `order` (
   `setTime` date NOT NULL,
   `orderState` int(11) NOT NULL,
   `orderPrice` double NOT NULL,
+  `orderNum` varchar(20) NOT NULL,
   PRIMARY KEY (`orderId`),
   KEY `userID` (`userId`),
   KEY `strategyID` (`strategyId`),

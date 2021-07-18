@@ -3,7 +3,7 @@ from db_config import db_init as db
 from models.strategy import Strategy
 
 
-# 用户模块操作类
+
 class StrategyOpe():
     # 应该映射到user表的字段
     def __init__(self):
@@ -12,6 +12,15 @@ class StrategyOpe():
                            'strategyPrice',
                            'strategyIntro',
                            ]
+
+    # 获取指定策略的price
+    def getById(self, Id):
+        try:
+            res = Strategy.query.filter_by(strategyId=Id).first()
+            return {'code':1,'msg':'success','data':res}
+        except Exception as e:
+            return {'code':0,'msg':'fail'}
+
 
     # 向策略列表中插入一种新策略，返回状态码
     def add(self, name, price, intro):

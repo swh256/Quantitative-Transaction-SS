@@ -7,4 +7,4 @@ class UserStrategy(db.Model):
     saledId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     userId = db.Column(db.Integer, nullable=False)
     strategyId = db.Column(db.Integer, nullable=False)
-    limitTime = db.Column(db.Date, nullable=False)
+    limitTime = db.Column(db.Integer, nullable=False)
