@@ -7,7 +7,12 @@ from db_config import db_init as db
 class UserOpe():
     # 应该映射到user表的字段
     def __init__(self):
-        pass
+        self.__fields__ = ['userId',
+                    'email',
+                    'userPassword',
+                    'userAuthority',
+                    'capitalReady',
+                    ]
 
     # 操作1 获取所有用户
     def _getAll(self):

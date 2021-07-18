@@ -30,3 +30,19 @@ INSERT INTO `stock`(
 INSERT INTO `stock`(
     `stockCode`,`stockName`)
     VALUES ('000632','三木集团');
+
+/* insert in to strategy table*/
+
+INSERT INTO `strategy`(
+    `strategyName`,`strategyPrice`,`strategyIntro`)
+    VALUES ('测试策略1',250,'这是一个简单的测试用例1');
+
+INSERT INTO `strategy`(
+    `strategyName`,`strategyPrice`,`strategyIntro`)
+    VALUES ('测试策略2',500.25,'这是一个简单的测试用例2');
+
+/* insert in to  table*/
+
+INSERT INTO `strategy`(
+    `strategyName`,`strategyPrice`,`strategyIntro`)
+    VALUES ('测试策略1',250,'这是一个简单的测试用例1');
