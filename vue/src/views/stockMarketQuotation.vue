@@ -67,9 +67,9 @@ export default {
       var myChart = echarts.init(chartDom);
       var option;
 
-      var upColor = '#ec0000';
-      var upBorderColor = '#8A0000';
-      var downColor = '#00da3c';
+      var upColor = '#EE2C2C';
+      var upBorderColor = '#FF4040';
+      var downColor = '#229453';
       var downBorderColor = '#008F28';
 
 
