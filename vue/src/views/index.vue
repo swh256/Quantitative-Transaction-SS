@@ -3,8 +3,8 @@
     <!--  主页图片  -->
     <HeadNav></HeadNav>
     <el-carousel :interval="5000" arrow="always" style="background-color: #abdde5" :height="hdgd">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
+      <el-carousel-item v-for="item in carouselIMG" :key="item">
+        <img :src="item" style="height: auto; width: 100%">
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -28,7 +28,13 @@ export default {
     return{
       number: '',
       hdgd: '740px',
-      userName: 'username'
+      userName: 'username',
+      carouselIMG:[
+        require('../assets/images/c-0.png'),
+        require('../assets/images/c-0.png'),
+        require('../assets/images/c-0.png'),
+        require('../assets/images/c-0.png'),
+      ]
     }
   },
   methods:{

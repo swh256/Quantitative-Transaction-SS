@@ -1,6 +1,14 @@
 <template>
 <div class="strategyStore">
   <HeadNav></HeadNav>
+  <el-container>
+    <el-slider>
+
+    </el-slider>
+    <el-main>
+
+    </el-main>
+  </el-container>
 </div>
 </template>
 
