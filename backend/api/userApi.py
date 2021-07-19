@@ -1,54 +1,66 @@
 # 业务逻辑
-from operation.userOpe  import UserOpe
+# 一系列业务功能方法
 
-from utils.data_process import *
-def getUserInfo():
-    # userList = [
-    #     {
-    #         "userId": "999",
-    #         "email": "123@qq.com",
-    #         "userPassword": "buhuizhenyouren996ba"
-    #     },
-    #     {
-    #         "userId": "888",
-    #         "email": "aka@foxmail.com",
-    #         "userPassword": "nishilailashideba"
-    #     }
-    # ]
-    userOpe = UserOpe()
-    data = userOpe.all()
-    # result = {}
-    # result.data = Class_To_Data(data, userOperation.__fields__)
-    # result.errCode = 0
-    # result.errMsg = "查询成功"
-    return Class_To_Data(data, userOpe.__fields__)
-# 添加持仓信息，返回消息码和结果信息
-def addUserStock(email, shareCode, sharCount, buyingPrice):
-    pass
-# 删除持仓信息， 返回消息码和结果信息
-def deleteUserStock(userName, shareCode):
-    pass
-def updateUserStock(userName, shareCode, sharCount, buyingPrice):
-    pass
-def queryUserStock(userName, shareCode):
-    pass
-def addStrategy(strategyName, strategyPrice, strategyIntro):
-    pass
-def deleteStrategy(strategyName):
-    pass
-def updateStrategy(strategyName, strategyPrice, strategyIntro):
-    pass
-def outputStrategy(strategyName):
-    pass
-def addOrder(userName, strategyName):
-    pass
-def deleteOrder(userName, strategyName):
-    pass
-def updateOrder(userName, strategyName):
-    pass
-def queryOrder(userName, strategyName):
-    pass
-def getLog():
-    pass
-def outputLog():
-    pass
+# 导入用户操作类
+from operation.userOpe import *
+
+
+
+def User_list():
+    return UserOpe().getUserList()
+
+
+# status code : 0 login fail     1 login success     2 have been login before
+def User_login(email,pwd):
+    # check this user is login?
+    authenticator = Authenticator()
+    if(authenticator.checkLogin()):
+        return 2
+    user = UserOpe()._queryByEmailPasswd(email,pwd)
+    if(user!=None):
+        # login OK
+        # set login info to session
+        authenticator._setUser(user)
+        return 1
+    else:
+        return 0
+
+
+# return    0  fail      1 success
+def User_reg(email, pwd):
+    userOperator = UserOpe()
+    if(userOperator._queryByEmail(email)!=None):
+        # this email have been register
+        return 0
+    else:
+        userOperator.addUser(email,pwd)
+        return 1
+
+# return 1  (always invoked successful.)
+def User_logout():
+    authenticator = Authenticator()
+    if(authenticator.checkLogin()):
+        authenticator._clearUser()
+    return 1
+
+
+# return     0   fail         1  success
+def User_unreg(email,pwd):
+    userOperator = UserOpe()
+    user:User = userOperator._queryByEmailPasswd(email,pwd)
+    if(user==None):
+        # error email or pwd
+        return 0
+    userOperator.removeUser(user.userId)
+    return 1
+
+def User_change(dict:dict):
+    userID = dict.get("userID")
+    if(userID==None):
+        return 0
+    userOpe=UserOpe()
+    user = userOpe._queryByUserID(userID)
+    if(user==None):
+        return 0
+    userOpe._undumpTo(dict,user)
+    userOpe._commit()
