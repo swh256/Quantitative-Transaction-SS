@@ -21,6 +21,10 @@ export default {
   component(id) {
     headNav
   },
+
+  methods:{
+
+  }
 }
 </script>
 

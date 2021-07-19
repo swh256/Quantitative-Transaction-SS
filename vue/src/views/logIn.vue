@@ -20,15 +20,15 @@
 
               <div class="login-form-content">
                 <h2>Where to?</h2>
-                <form action="#" class="signin-form" method="post">
+                <form class="signin-form">
                   <div class="one-frm">
 
                     <label>E-mail</label>
-                    <input type="text" name="E-mail"  placeholder="" required="">
+                    <input type="text" v-model="userEmail" name="E-mail"  placeholder="" required="">
                   </div>
                   <div class="one-frm">
                     <label>Password</label>
-                    <input type="password" name="Password"  placeholder="" required="">
+                    <input type="password" name="Password" v-model="pwd" placeholder="" required="">
                   </div>
                   <label class="check-remaind">
                     <input type="checkbox">
@@ -36,7 +36,7 @@
                     <p class="remember">Remember Me</p>
 
                   </label>
-                  <button class="btn btn-style mt-3" type="submit">Sign In </button>
+                  <button class="btn btn-style mt-3" type="submit" @click="Push_User_Info">Sign In </button>
                   <p class="already">Don't have an account?
                     <router-link :to="{name:'register'}">Register</router-link>
                   </p>
@@ -62,16 +62,31 @@
 <script>
 // @ is an alias to /src
 //import Vue from "vue";
+import axios from "axios";
 
 export default {
   name: 'logIn',
   data(){
     return {
-      num:100,
-      numbers:[1,3,5,7,9]
+      userEmail:'',
+      pwd:'',
+      //后端返回的数据
+      reData:'',
     }
   },
   methods:{
+    Push_User_Info(){
+      axios.post('http://192.168.43.95:5000/manager/getUserInfoList',{
+        "email":this.userEmail,
+        "pwd":this.pwd
+      })
+          .then(response => {
+            console.log('/a1', response.data)
+          }, error => {
+            console.log('错误', error.message)
+          })
+      // alert(this.testData);
+    }
 
   },
   mounted() {
