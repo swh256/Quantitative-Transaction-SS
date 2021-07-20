@@ -1,6 +1,6 @@
 # 导入对应数据模型类
-from backend.models.user import User
-from backend.db_config import db_init as db
+from models.user import User
+from db_config import db_init as db
 from flask import session
 
 
