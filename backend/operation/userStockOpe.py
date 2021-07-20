@@ -44,7 +44,7 @@ class UserStockOpe():
             return {'code': 0, 'msg': 'fail'}
 
     # 查询整个持仓数据表，返回列表和状态码
-    def get_list(self):
+    def getList(self):# 函数名-------------modified by Aubergine
         # 数据库模型类：调用查询方法
         try:
             list = UserStock.query.all()
@@ -53,7 +53,7 @@ class UserStockOpe():
             return {'code': 0, 'msg': 'fail'}
 
     # 查询指定用户id的所有持仓信息，返回股票list和状态码
-    def getuserhold(self, Id):
+    def getUserHold(self, Id):# 函数名-------------modified by Aubergine
         try:
             list = UserStock.query.filter_by(userId=Id).all()
             return {'code':1,'msg':'success','data':list}
@@ -63,10 +63,17 @@ class UserStockOpe():
 
 
     #按指定用户id和股票code可以修改对应的持股数量，返回状态码
-    def modify(Id, code, kwargs):
-        usk = UserStock(**kwargs)
-        results = UserStock.query.filter_by(userId=Id, stockCode=code).all()
-        results = usk
-        db.session.commit()
-        return '修改成功'
+    def modify(userId, stockCode, stockCount, buyingPrice):# try-exception---------------------modified by Aubergine
+        try:
+            UserStock.query.filter_by(userId=userId, stockCode=stockCode).update({
+                "stockCode": stockCode,
+                "stockCount": stockCount,
+                "buyingPrice": buyingPrice,
+                "buyingPriAll": stockCount * buyingPrice,
+                "userId": userId
+            })
+            db.session.commit()
+            return {'code':1,'msg':'success'}
+        except Exception as e:
+            return {'code':0,'msg':'fail'}
 

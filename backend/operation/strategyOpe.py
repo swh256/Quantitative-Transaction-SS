@@ -38,9 +38,9 @@ class StrategyOpe():
             return {'code':0,'msg':'fail'}
 
     # 删除一条指定策略，返回状态码
-    def remove(self, Id):
+    def remove(self, strategyName):# 参数修改------------modified by Aubergine
         try:
-            Strategy.query.filter_by(strategyId=Id).delete()
+            Strategy.query.filter_by(strategyName = strategyName).delete()
             db.session.commit()
             return {'code':1,'msg':'success'}
         except Exception as e:
@@ -74,14 +74,18 @@ class StrategyOpe():
 
     # 修改指定id策略
     #TODO 需要修改
-    def modify(Id, kwargs):
-
+    def modify(strategyName, strategyPrice, strategyIntro):
         try:
-            stra = Strategy(**kwargs)
-            results = Strategy.query.filter_by(strategyId=Id).all()
-            results = stra
+            Strategy.query.filter_by(strategyName=strategyName).update({
+                "strategyName": strategyName,
+                "strategyPrice": strategyPrice,
+                "strategyIntro": strategyIntro
+            })
             db.session.commit()
             return {'code':1,'msg':'success'}
         except Exception as e:
             return {'code':0,'msg':'fail'}
 
+    # 获取指定策略Id, 用于联表操作
+    def getStrategyIdByName(self, strategyName):
+        return Strategy.query.filter(strategyName == strategyName).first().strategyId
