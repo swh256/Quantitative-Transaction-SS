@@ -57,7 +57,7 @@
     <div class="copyright text-center">
       <div class="wrapper">
         <el-button @click="Push_User_Info">test</el-button>
-        <p class="copy-footer-29">© 2021 Working Register.{{testData}}{{userEmail}}</p>
+        <p class="copy-footer-29">© 2021 Working Register.</p>
       </div>
     </div>
     <!-- //copyright-->
@@ -76,21 +76,19 @@ export default {
       userEmail:'',
       userPwd:'',
       confirmPwd:'',
-      testData:''
     }
   },
   methods:{
     Push_User_Info(){
-      axios.get('http://192.168.43.95:5000/manager/getUserInfoList')
-      .then(data => {
-        if (data.status == 200) {
-          this.testData = data.data
-          console.log(data)
-        } else {
-          // alert('加载错误!')
-          console.log(data)
-        }
+      axios.post('http://192.168.43.95:5000/manager/getUserInfoList',{
+        "email":this.userEmail,
+        "pwd":this.userPwd
       })
+          .then(response => {
+            alert("注册成功!")
+          }, error => {
+            console.log('错误', error.message)
+          })
       // alert(this.testData);
     }
 
