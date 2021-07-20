@@ -1,14 +1,15 @@
 <template>
   <!--  导航栏  -->
-  <el-menu :default-active="''" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-    <el-menu-item index="1">首页</el-menu-item>
-    <el-submenu index="2">
+  <el-menu :default-active="this.$route.path" class="el-menu-demo" background-color="#ffffff" active-text-color="#00868B" text-color="#668B8B" mode="horizontal" @select="handleSelect" router>
+    <el-menu-item index="/">首页</el-menu-item>
+    <el-menu-item index="/strategystore">策略商城</el-menu-item>
+    <el-submenu index="">
       <template slot="title">股市查询</template>
-      <router-link :to="{name:'stockMarketQuotation'}"><el-menu-item index="2-1">整体行情查询</el-menu-item></router-link>
-      <router-link :to="{name:'stockQuotation'}"><el-menu-item index="2-2">单只股票查询</el-menu-item></router-link>
+      <el-menu-item index="/stockinfo/stockmarketquotation">整体行情查询</el-menu-item>
+      <el-menu-item index="/stockinfo/stockquotation">单只股票查询</el-menu-item>
     </el-submenu>
-    <el-menu-item index="3"><router-link :to="{name:'strategyStore'}">策略商城</router-link></el-menu-item>
-    <el-menu-item index="4"><router-link :to="{name:'manager'}">管理</router-link></el-menu-item>
+    <el-menu-item index="/manager">管理</el-menu-item>
+
     <div class="index-nav-right" type="flex" v-if="false">
       <el-button  >登录</el-button>
       <el-button  >注册</el-button>
@@ -17,7 +18,7 @@
       <el-dropdown>
           <span class="el-dropdown-link">
             <i class="el-icon-user-solid" ></i>
-            <span> [USER_NAME] </span>
+            <span> {{userName}} </span>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
         <el-dropdown-menu slot="dropdown">
@@ -32,7 +33,12 @@
 <script>
 export default {
   name: "headNav",
-  userName: "username"
+  data(){
+    return{
+      userName: "[USER_NAME]",
+      actIndex:this.$route.params.actID,
+    }
+  },
 }
 </script>
 

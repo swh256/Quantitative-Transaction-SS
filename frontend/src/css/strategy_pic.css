@@ -1,0 +1,12 @@
+.static-pic-stg{
+    height: 500px;
+    width: 1000px;
+    margin-top: 25px;
+    margin-left: 50px;
+}
+
+.static-pic-sto{
+    height: 500px;
+    width: auto;
+    margin-top: 25px;
+}

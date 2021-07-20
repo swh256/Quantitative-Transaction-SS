@@ -1,53 +1,23 @@
 <template>
 <div class="manager">
-  <h1><el-button @click="Push_User_Info">Manager</el-button></h1><hr>
+  <HeadNav></HeadNav>
+<!--  <h1><el-button @click="Push_User_Info">Manager</el-button></h1><hr>-->
   <el-container style="height: 500px; border: 1px solid #eee">
-    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+    <el-aside width="200px" style="background-color: #ffffff">
       <el-menu :default-openeds="['1', '3']">
         <el-submenu index="1">
-          <template slot="title"><i class="el-icon-message"></i>导航一</template>
-          <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
+          <template slot="title"><i class="el-icon-user"></i>用户管理</template>
+          <el-menu-item-group style="background-color: #ffffff">
+            <el-menu-item index="1-1">基本信息表</el-menu-item>
+            <el-menu-item index="1-2">持仓信息表</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="分组2">
-            <el-menu-item index="1-3">选项3</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="1-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-          </el-submenu>
         </el-submenu>
         <el-submenu index="2">
-          <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-          <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="2-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
+          <template slot="title"><i class="el-icon-menu"></i>策略管理/上传</template>
+          <el-menu-item-group style="background-color: #ffffff">
+            <el-menu-item index="2-1">策略列表管理</el-menu-item>
+            <el-menu-item index="2-2">上传策略模型</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="分组2">
-            <el-menu-item index="2-3">选项3</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="2-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-submenu index="3">
-          <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-          <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="3-1">选项1</el-menu-item>
-            <el-menu-item index="3-2">选项2</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="分组2">
-            <el-menu-item index="3-3">选项3</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="3-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-          </el-submenu>
         </el-submenu>
       </el-menu>
     </el-aside>
@@ -62,7 +32,7 @@
             <el-dropdown-item>删除</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <span>王小虎</span>
+        <span>管理员</span>
       </el-header>
 
       <el-main>
@@ -86,9 +56,15 @@
 
 <script>
 import axios from "axios";
+import headNav from "../components/headNav";
+import HeadNav from "../components/headNav";
 
 export default {
   name: "manager",
+  components: {HeadNav},
+  component(id) {
+    headNav
+  },
   data(){
     return{
       tableData: [],
@@ -113,5 +89,12 @@ export default {
 </script>
 
 <style scoped>
-
+  html,body,.el-container{
+    /*设置内部填充为0，几个布局元素之间没有间距*/
+    padding: 0px;
+    /*外部间距也是如此设置*/
+    margin: 0px;
+    /*统一设置高度为100%*/
+    height: 100%;
+  }
 </style>
