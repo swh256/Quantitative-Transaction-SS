@@ -8,9 +8,21 @@ from flask import session
 class UserOpe():
     # 应该映射到user表的字段
     def __init__(self):
-        pass
+        self.__fields__ = ['userId',
+                           'email',
+                           'userPassword',
+                           'userAuthority',
+                           'capitalReady'
+                           ]
 
-    # 操作1 获取所有用户
+    # 获取用户账户信息
+    def getUserInfoByEmail(self, email: str):
+        user = self._queryByEmail(email)
+        if (user):
+            return self._dump(user)
+        else:
+            return None
+    #* 操作1 获取所有用户
     def _getAll(self):
         return User.query.all()
     def _commit(self):
@@ -22,20 +34,22 @@ class UserOpe():
         else:
             return None
 
-    def _queryByEmail(self, email: str):
-        users = User.query.filterBy(User.email == email)
-        if (users != []):
-            return users[0]
+    #* 验证用户信息
+    def _queryByEmail(self, _email: str):
+        user = User.query.filter_by(email=_email).first()
+        if (user != []):
+            return user
         else:
             return None
-
+    #* 根据email和password获取用户
     def _queryByEmailPasswd(self, email: str, pwd: str):
-        users = User.query.filterBy(User.email == email, User.userPassword == pwd)
-        if (users != []):
-            return users[0]
+
+        user = User.query.filter_by(email=email, userPassword=pwd).first()
+        if (user != None):
+            return user
         else:
             return None
-
+    #*
     def _insert(self, user: User):
         db.session.add(user)
         db.session.commit()
@@ -61,18 +75,15 @@ class UserOpe():
     def _undump(self, d:dict):
         return  self._undumpTo(d,User())
 
-    def addUser(self, email: str, password: str):
-        if (not self._queryByEmail(email)):
-            # OK
-            user = User()
-            user.userPassword = password
-            user.email = email
-            user.userAuthority = 0
-            user.capitalReady = 0
-            self._insert(user)
-            return True
-        else:
-            return False
+    #* 添加新用户
+    def addUser(self, email: str, password: str,auth=0):
+        user = User()
+        user.userPassword = password
+        user.email = email
+        user.userAuthority = auth
+        user.capitalReady = 0
+        self._insert(user)
+        return {'code':1,'msg':'success'}
 
     def removeUser(self, userID: int):
         user = self._queryByUserID(userID)
@@ -105,12 +116,7 @@ class UserOpe():
         else:
             return None
 
-    def getUserInfoByEmail(self, email: str):
-        user = self._queryByEmail(email)
-        if (user):
-            return self._dump(user)
-        else:
-            return None
+
 
     def getUserInfoByEmailPasswd(self, email: str, password: str):
         user = self._queryByEmailPasswd(email, password)

@@ -31,11 +31,13 @@
 </template>
 
 <script>
+//挂载全局变量
+import global from '../views/Global.vue';
 export default {
   name: "headNav",
   data(){
     return{
-      userName: "[USER_NAME]",
+      userName: global.email.split('@')[0],
       actIndex:this.$route.params.actID,
     }
   },

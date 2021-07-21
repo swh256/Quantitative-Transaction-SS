@@ -6,7 +6,7 @@
       <div class="workinghny-form-grid">
         <div class="wrapper">
           <div class="logo">
-            <h1><a class="brand-logo"><span>Welcome to</span> use our products</a></h1>
+            <h1><a class="brand-logo"><span>欢迎使用</span>量化交易服务平台</a></h1>
             <!-- if logo is image enable this
                 <a class="brand-logo" href="#index.html">
                     <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
@@ -19,28 +19,25 @@
             <div class="form-right-inf">
 
               <div class="login-form-content">
-                <h2>Where to?</h2>
-                <form class="signin-form">
-                  <div class="one-frm">
+                <div class="one-frm">
 
-                    <label>E-mail</label>
-                    <input type="text" v-model="userEmail" name="E-mail"  placeholder="" required="">
-                  </div>
-                  <div class="one-frm">
-                    <label>Password</label>
-                    <input type="password" name="Password" v-model="pwd" placeholder="" required="">
-                  </div>
-                  <label class="check-remaind">
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                    <p class="remember">Remember Me</p>
+                  <label>邮箱</label>
+                  <input type="text" v-model="userEmail" name="E-mail"  placeholder="" required="">
+                </div>
+                <div class="one-frm">
+                  <label>密码</label>
+                  <input type="password" name="Password" v-model="pwd" placeholder="" required="">
+                </div>
+                <label class="check-remaind">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                  <p class="remember">保持登录状态</p>
 
-                  </label>
-                  <button class="btn btn-style mt-3" type="submit" @click="Push_User_Info">Sign In </button>
-                  <p class="already">Don't have an account?
-                    <router-link :to="{name:'register'}">Register</router-link>
-                  </p>
-                </form>
+                </label>
+                <button class="btn btn-style mt-3" type="submit" @click="Push_User_Info">登录 </button>
+                <p class="already">还没有账户？
+                  <router-link :to="{name:'register'}">点击注册</router-link>
+                </p>
               </div>
             </div>
           </div>
@@ -63,6 +60,9 @@
 // @ is an alias to /src
 //import Vue from "vue";
 import axios from "axios";
+import md5 from "md5";
+//挂载全局变量
+import global from './Global.vue';
 
 export default {
   name: 'logIn',
@@ -76,17 +76,33 @@ export default {
   },
   methods:{
     Push_User_Info(){
-      axios.post('http://192.168.43.95:5000/manager/getUserInfoList',{
-        "email":this.userEmail,
-        "pwd":this.pwd
-      })
-          .then(response => {
-            console.log('/a1', response.data)
-          }, error => {
-            console.log('错误', error.message)
+      
+      axios.post('http://localhost:5000/user/login',{
+                'userEmail':this.userEmail,
+                'pwd':md5(this.pwd).toUpperCase()
+      }) .then(response => {
+            if (response.status == 200) {
+              global.userId =  response.data.data
+              global.email = this.userEmail
+              global.auth = response.data.auth
+              if(response.data.code == 1){
+                // this.$router.push({name:'/',params:{email:this.userEmail,id:'[USER_ID]'}})
+                this.$router.push('/')
+                alert('登录成功！')
+
+              }
+              else {
+                alert('邮箱或密码错误！')
+              }
+            }
+
+            else {
+              alert('加载错误!')
+              console.log(data)
+            }
           })
       // alert(this.testData);
-    }
+    },
 
   },
   mounted() {

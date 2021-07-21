@@ -17,7 +17,8 @@ import Vue from "vue";
 //import 'bootstrap/dist/js/bootstrap.min.js'
 import headNav from "../components/headNav";
 import HeadNav from "../components/headNav";
-
+//挂载全局变量
+import global from './Global.vue';
 export default {
   name: 'index',
   components: {HeadNav},
