@@ -1,0 +1,39 @@
+/*body{*/
+/*    margin:0;*/
+/*    padding:0;*/
+/*}*/
+html,body,#app,.el-container,div.index{
+    /*设置内部填充为0，几个布局元素之间没有间距*/
+    padding: 0px;
+    /*外部间距也是如此设置*/
+    margin: 0px;
+    /*统一设置高度为100%*/
+    height: 100%;
+}
+
+.el-icon-user-solid{
+    font-size: 30px;
+}
+
+.index-nav-right{
+    margin-right: 20px;
+    margin-top: 10px;
+    float: right;
+    align: middle;
+}
+
+a,.router-link-active {
+    text-decoration: none;
+}
+
+.el-carousel__item h3{
+    color: #ffffff;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 700px;
+    margin: 0;
+}
+
+
+
+
