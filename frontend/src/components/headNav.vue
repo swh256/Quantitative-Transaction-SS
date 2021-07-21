@@ -23,7 +23,7 @@
           </span>
         <el-dropdown-menu slot="dropdown">
           <router-link :to="{name:'userInfo'}"><el-dropdown-item>用户信息</el-dropdown-item></router-link>
-          <el-dropdown-item divided>退出登录</el-dropdown-item>
+          <router-link :to="{name:'logIn'}"><el-dropdown-item divided>退出登录</el-dropdown-item></router-link>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
