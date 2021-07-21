@@ -5,6 +5,25 @@
 from operation.userOpe import *
 
 
+#* 检查用户账户信息
+def userLogin(email,pwd):
+    user =  UserOpe()._queryByEmailPasswd(email,pwd)
+    if(user != None):
+        return {'code':1,'msg':'success','data':user.userId,'auth':user.userAuthority}
+    else: 
+        return {'code':0,'msg':'fail'}
+
+#* 用户注册
+def userReg(email,pwd):
+    user = UserOpe()._queryByEmail(email)
+    if(user != None):
+        #用户已存在
+        return {'code':0,'msg':'fail'}
+    else: 
+        #用户不存在
+        UserOpe().addUser(email,pwd)
+        return {'code':1,'msg':'success','data':UserOpe()._queryByEmailPasswd(email,pwd).userId}
+        
 
 def User_list():
     return UserOpe().getUserList()

@@ -52,8 +52,8 @@ class UserStraOpe():
             return {'code':0,'msg':'fail'}
 
 
-    # 查询整个已购买策略数据表，返回状态码和已购买策略list
-    def getList(self):
+    #* 查询整个已购买策略数据表，返回状态码和已购买策略list
+    def all(self):
         # 数据库模型类：调用查询方法
         try:
             list = UserStrategy.query.all()

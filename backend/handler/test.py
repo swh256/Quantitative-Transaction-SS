@@ -13,8 +13,8 @@ def ok():
     #初始化mongode数据库
     mongo = StockMongoOpe()
     # StockData().loadToMongo()
-    res = mongo.quryByCode('000001')
-    res = {'code':1,'msg':'success','path':res.get('data')}
+    res = mongo.all()
+    res = {'code':1,'msg':'success','path':res.get('data')[0]}
 
 
     return(jsonify(res))

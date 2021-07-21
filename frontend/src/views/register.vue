@@ -8,7 +8,7 @@
         <div class="logo">
           <h1>
             <router-link :to="{name:'logIn',params:{}}" class="brand-logo">
-              <span>Welcome to</span> use our products
+              <span>欢迎使用</span>量化交易服务平台
             </router-link>
           </h1>
           <!-- if logo is image enable this
@@ -26,16 +26,16 @@
               <div  class="signin-form">
                 <div class="one-frm">
 
-                  <label>E-mail</label>
+                  <label>邮箱</label>
                   <input type="text" name="E-mail" v-model="userEmail"  placeholder="" required="">
                 </div>
                 <div class="one-frm">
-                  <label>Password</label>
+                  <label>密码</label>
                   <input type="password" name="Password" v-model="userPwd" placeholder="" required="">
                 </div>
                 <div class="one-frm">
-                  <label>Confirm Password</label>
-                  <input type="password" name="ConfirmPassword" v-model="confirmPwd" placeholder="" required="">
+                  <label>确认密码</label>
+                  <input  type="password" name="ConfirmPassword" v-model="confirmPwd" placeholder="" required="">
                 </div>
 <!--                <label class="check-remaind">-->
 <!--                  <input type="checkbox">-->
@@ -44,8 +44,8 @@
 
 <!--                </label>-->
                 <br/><br/>
-                <button class="btn btn-style mt-3" type="submit" @click="Push_User_Info">Submit </button>
-                <p class="already">Already have an account? <router-link :to="{name:'logIn',params:{}}">Log In</router-link></p>
+                <button class="btn btn-style mt-3" type="submit" @click="Push_User_Info">注册</button>
+                <p class="already">已有账号?<router-link :to="{name:'logIn',params:{}}">点击登录</router-link></p>
               </div>
             </div>
           </div>
@@ -56,7 +56,6 @@
     <!-- copyright-->
     <div class="copyright text-center">
       <div class="wrapper">
-        <el-button @click="Push_User_Info">test</el-button>
         <p class="copy-footer-29">© 2021 Working Register.</p>
       </div>
     </div>
@@ -68,7 +67,9 @@
 
 <script>
 import axios from "axios";
-
+import md5 from "md5";
+//挂载全局变量
+import global from './Global.vue';
 export default {
   name: "register",
   data(){
@@ -79,19 +80,38 @@ export default {
     }
   },
   methods:{
-    Push_User_Info(){
-      axios.post('http://192.168.43.95:5000/manager/getUserInfoList',{
-        "email":this.userEmail,
-        "pwd":this.userPwd
+    Push_User_Info() {
+      if(this.userPwd != this.confirmPwd){
+        alert('密码不匹配')
+      }else{
+        axios.post('http://localhost:5000/user/reg', {
+          "email": this.userEmail,
+          'pwd':md5(this.userPwd).toUpperCase()
       })
           .then(response => {
-            alert("注册成功!")
-          }, error => {
-            console.log('错误', error.message)
+            if (response.status == 200) {
+              console.log(response.data)
+              if (response.data.code == 1) {
+                
+                global.email = this.userEmail
+                global.userId = response.data.data
+                global.auth = 0
+                // this.$router.push({name:'/',params:{email:this.userEmail,id:'[USER_ID]'}})
+                this.$router.push('/')
+                alert('注册成功！')
+              } else {
+                alert('用户已注册！')
+              }
+            } else {
+              alert('加载错误!')
+              console.log(data)
+            }
           })
       // alert(this.testData);
-    }
 
+      }
+
+    }
   }
 }
 </script>
