@@ -37,7 +37,7 @@
 
       <el-main>
         <el-table :data="tableData" v-if="actIndex=='1-1'">
-          <el-table-column prop="id" label="用户id" width="140">
+          <el-table-column prop="userId" label="用户id" width="140">
           </el-table-column>
           <el-table-column prop="email" label="邮箱" width="140">
           </el-table-column>
@@ -63,23 +63,23 @@
           </el-table-column>
         </el-table>
         <el-table :data="tableData" v-else-if="actIndex=='2-1'">
-          <el-table-column prop="id" label="策略id" width="140">
+          <el-table-column prop="strategyId" label="策略id" width="140">
           </el-table-column>
-          <el-table-column prop="id" label="策略名称" width="140">
+          <el-table-column prop="strategyName" label="策略名称" width="140">
           </el-table-column>
-          <el-table-column prop="email" label="策略价格" width="140">
+          <el-table-column prop="strategyPrice" label="策略价格" width="140">
           </el-table-column>
-          <el-table-column prop="userPassword" label="策略简介" width="140">
+          <el-table-column prop="strategyIntro" label="策略简介" width="140">
           </el-table-column>
         </el-table>
         <el-table :data="tableData" v-else-if="actIndex=='2-2'">
-          <el-table-column prop="id" label="已售id" width="140">
+          <el-table-column prop="saledId" label="已售id" width="140">
           </el-table-column>
-          <el-table-column prop="email" label="策略id" width="140">
+          <el-table-column prop="strategyId" label="策略id" width="140">
           </el-table-column>
-          <el-table-column prop="userPassword" label="用户id" width="120">
+          <el-table-column prop="userId" label="用户id" width="120">
           </el-table-column>
-          <el-table-column prop="capitalReady" label="有效期" width="120">
+          <el-table-column prop="limitTime" label="有效期" width="120">
           </el-table-column>
         </el-table>
       </el-main>
@@ -107,12 +107,14 @@ export default {
   },
   methods:{
     //显示用户基本信息
-    userInfo(){
+    userInfo(event){
+      this.actIndex = event.index
       axios.post('http://localhost:5000/query/userInfo') .then(response => {
             if (response.status == 200) {
               if(response.data.code == 1){
 
                 console.log(response.data.data)
+                this.tableData = response.data.data
 
               }
               else {
@@ -127,13 +129,14 @@ export default {
           })
 
     },
-    straInfo(){
+    straInfo(event){
+      this.actIndex = event.index
         axios.post('http://localhost:5000/query/straInfo') .then(response => {
         if (response.status == 200) {
           if(response.data.code == 1){
 
             console.log(response.data.data)
-
+            this.tableData = response.data.data
           }
           else {
             alert('发生异常！')
@@ -147,13 +150,14 @@ export default {
       })
 
     },
-    saled(){
+    saled(event){
+       this.actIndex = event.index
         axios.post('http://localhost:5000/query/saledInfo') .then(response => {
         if (response.status == 200) {
           if(response.data.code == 1){
 
             console.log(response.data.data)
-
+            this.tableData = response.data.data
           }
           else {
             alert('发生异常！')
@@ -171,6 +175,7 @@ export default {
       this.actIndex = event.index
     },
     Get_User_Info(){
+      
       axios.get('http://192.168.43.95:5000/manager/getUserInfoList')
           .then(data => {
             if (data.status == 200) {
